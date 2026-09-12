@@ -4,25 +4,27 @@ class Solution {
         for (int i = 0; i < order.length(); i++) {
             hm.put(order.charAt(i), i);
         }
-
         for (int i = 0; i < words.length - 1; i++) {
-            int minLen = Math.min(words[i].length(), words[i + 1].length());
-            boolean foundDiff = false;
-            for (int j = 0; j < minLen; j++) {
-                char c1 = words[i].charAt(j);
-                char c2 = words[i + 1].charAt(j);
-                if (c1 != c2) {
-                    if (hm.get(c1) > hm.get(c2)) {
-                        return false;
-                    }
-                    foundDiff = true;
-                    break;
-                }
-            }
-            if (!foundDiff && words[i].length() > words[i + 1].length()) {
+            if (!isValid(words[i], words[i + 1], hm)) {
                 return false;
             }
         }
         return true;
+    }
+
+    public boolean isValid(String w1, String w2, HashMap<Character,Integer> order){
+        int minLen = Math.min(w1.length(),w2.length());
+        for(int j=0;j<minLen;j++){
+            char c1 = w1.charAt(j);
+            char c2 = w2.charAt(j);
+            if(c1 != c2){
+                if(order.get(c1) < order.get(c2)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return w1.length() <= w2.length();
     }
 }
