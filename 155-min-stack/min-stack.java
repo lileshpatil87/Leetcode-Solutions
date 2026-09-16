@@ -1,30 +1,32 @@
 class MinStack {
-    int minVal = Integer.MAX_VALUE;
-    Deque<Integer> tr = new ArrayDeque<>();
+
+    Deque<Integer> tracker = new ArrayDeque<>();
     Deque<Integer> sc = new ArrayDeque<>();
+
     public MinStack() {
-        
+
     }
-    
+
     public void push(int value) {
-        tr.push(minVal);
-        if(value < minVal){
-            minVal = value;
+        if (!tracker.isEmpty() && tracker.peek() < value) {
+            tracker.push(tracker.peek());
+        } else {
+            tracker.push(value);
         }
         sc.push(value);
     }
-    
+
     public void pop() {
         sc.pop();
-        minVal = tr.pop();
+        tracker.pop();
     }
-    
+
     public int top() {
         return sc.peek();
     }
-    
+
     public int getMin() {
-        return minVal;
+        return tracker.peek();
     }
 }
 
