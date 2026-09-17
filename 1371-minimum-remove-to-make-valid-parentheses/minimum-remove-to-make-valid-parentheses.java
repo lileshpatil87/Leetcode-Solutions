@@ -1,25 +1,24 @@
 class Solution {
     public String minRemoveToMakeValid(String s) {
-        Deque<Integer> de = new ArrayDeque<>();
+        Deque<Integer> sc = new ArrayDeque<>();
         StringBuilder sb = new StringBuilder(s);
-        for (int i = 0; i < sb.length(); i++) {
+        for(int i=0;i<sb.length();i++){
             char c = sb.charAt(i);
-            if (Character.isLetter(c)) {
+            if(Character.isLetter(c)){
                 continue;
             }
-            if (c == '(') {
-                de.push(i);
-            } else {
-                if (de.isEmpty()) {
+            if(s.charAt(i) == '('){
+                sc.push(i);
+            }else{
+                if(!sc.isEmpty()){
+                    sc.pop();
+                }else{
                     sb.setCharAt(i,' ');
-                } else {
-                    de.pop();
                 }
             }
         }
-        while (!de.isEmpty()) {
-            int x = de.pop();
-            sb.setCharAt(x, ' ');
+        while(!sc.isEmpty()){
+            sb.setCharAt(sc.pop(),' ');
         }
         return sb.toString().replace(" ","");
     }
