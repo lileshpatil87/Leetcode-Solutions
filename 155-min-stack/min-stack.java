@@ -1,15 +1,19 @@
 class MinStack {
 
-    Deque<Integer> tracker = new ArrayDeque<>();
     Deque<Integer> sc = new ArrayDeque<>();
+    Deque<Integer> tracker = new ArrayDeque<>();
 
     public MinStack() {
 
     }
 
     public void push(int value) {
-        if (!tracker.isEmpty() && tracker.peek() < value) {
-            tracker.push(tracker.peek());
+        if (!sc.isEmpty()) {
+            if (value < tracker.peek()) {
+                tracker.push(value);
+            } else {
+                tracker.push(tracker.peek());
+            }
         } else {
             tracker.push(value);
         }
