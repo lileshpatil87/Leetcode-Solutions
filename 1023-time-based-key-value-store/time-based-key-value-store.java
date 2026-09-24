@@ -13,13 +13,10 @@ class TimeMap {
 
     public String get(String key, int timestamp) {
         TreeMap<Integer, String> tm = hm.getOrDefault(key, new TreeMap<>());
-        String s = "";
         if (tm.floorKey(timestamp) != null) {
-            s = tm.getOrDefault(tm.floorKey(timestamp), "");
-        } else {
-            return "";
+            return tm.get(tm.floorKey(timestamp));
         }
-        return s;
+        return "";
     }
 }
 
