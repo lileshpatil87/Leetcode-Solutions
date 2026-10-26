@@ -27,7 +27,6 @@ class Solution {
             max = root.val;
             count++;
         }
-        System.out.println(root.val + " " + count + " : " + max);
         count += dfs(root.left, max);
         count += dfs(root.right, max);
         return count;
